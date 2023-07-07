@@ -4,6 +4,9 @@ The project is written in PHP and MySQL will need xampp running in your machine 
 
 Extract or clone the project in your htdocs folder and inside the erd_sql_dumps folder there is a EKOMI EDR.pdf it just show how the database tables are connect and function as one unit there is also a CREATE DATABSE.docx file Copy the content of the file and run them in your mysql workbench or what ever environment you use to run MySQL
 
+once everthing is set and running navigate to http://localhost:81/ekomi-recruitment-process_A/index.php this is the landing page 
+You can change the port number according to how you set yours in the xampp or php.ini file In mine I default it to 81.
+
 The database will be imported and ready to be used. 
 It has One Admin user Email = Liswogar1@gmail.com and password is = '01'
 
@@ -29,4 +32,3 @@ It also runs on various platforms, including Windows, macOS, Linux, and UNIX, ma
 The combination of PHP as the programming language and Bootstrap HTML as the framework provides a solid foundation for building dynamic, database-driven web applications with a responsive and user-friendly interface. These technologies have a large user base, extensive documentation, and community support, making them reliable choices for web development projects.
 
 After Logging in you should create many user with different permissions to have or see the difference in the flow of task and how the systems works.
- 
