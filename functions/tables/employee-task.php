@@ -46,7 +46,7 @@
     // Apply paging
     $task = array_slice($task, $dataStart, $dataLength);
 
-    foreach ($task as $row){
+    foreach($task as $row){
         $data['data'][$r]['rowID'] = $r;
         $data['data'][$r]['rec'] = $row['id'];
         $data['data'][$r]['id'] = $row['id'];
@@ -56,18 +56,11 @@
         $data['data'][$r]['date_created'] = $row['date_created'];
         $data['data'][$r]['date_updated'] = $row['date_updated'];
         $data['data'][$r]['assigned_by'] = $row['assigned_by_name'] .' '.$row['assigned_by_surname'] ;
-        $data['data'][$r]['assigned_to'] = $row['assigned_to_name'] .' '.$row['assigned_to_surname'] ;
-        $data['data'][$r]['actions'] = "<button class='btn btn-danger triggerActions' data-rec='$row[id]'>
-                                            <span class='glyphicon glyphicon-trash' id='delete' title='delete task' data-toggle='tooltip'></span>
-                                        </button>
-                                            &nbsp;&nbsp;
-                                        <button class='btn btn-primary triggerEdit' data-rec='$row[id]' data-title='$row[title]'
+        $data['data'][$r]['actions'] = "<button class='btn btn-primary triggerEdit' data-rec='$row[id]' data-title='$row[title]'
                                             data-description='$row[description]' data-status='$row[status]' data-date_created='$row[date_created]'>
                                             <span class='glyphicon glyphicon-check' id='complete' title='complete task' data-toggle='tooltip'></span>
-                                        </button>
-                                        ";
-						
-
+                                        </button> ";
+        
         ++$r;
     }
 

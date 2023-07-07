@@ -55,7 +55,19 @@
 				$response = "<span style='color: Red;'>Error!! please try again if problem persist contact admin</span>";
 			}
 		}
-				
+
+		$apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=Pretoria,sa&APPID=2265b043141cf33671d01a1d6bb1e00a';
+		$response = file_get_contents($apiUrl);
+		$weatherData = json_decode($response, true);
+		
+		print_r($weatherData);
+		// Process and display the weather data
+		// $temperature = $weatherData['current']['temp'];
+		// $description = $weatherData['current']['weather'][0]['description'];
+
+		// echo "Current Temperature: $temperature &deg;C";
+		// echo "Weather Description: $description";
+		
 	?>
 	<!-- header ends here -->
 	<!-- page content starts here -->
@@ -63,7 +75,6 @@
 		<div id="content-wrap">
 			<div class="row">
 				<?php echo "<div id='toast_message'> ".$response." </div>"; ?>
-				<button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#exampleModal">Add User</button>
 			</div>
 			<br/>
 			<div class="employee">
@@ -98,59 +109,6 @@
 					</div>
 				</div>
 			</div>
-		
-			<!-- Modal To add new user-->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">New User</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form action="functions/functions.php" method="POST" id="formUser">
-								<div class="form-group">
-									<label for="name" class="col-form-label">Name:</label>
-									<input type="text" class="form-control" id="name" name="name" required>
-								</div>
-								<div class="form-group">
-									<label for="surname" class="col-form-label">Surname:</label>
-									<input type="text" class="form-control" id="surname" name="surname" data-src="surname" required>
-								</div>
-								
-								<div class="form-group">
-									<label for="email" class="col-form-label">E-mail:</label>
-									<input type="text" class="form-control" id="email" name="email" data-src="email" required>
-								</div>
-								<div class="form-group">
-									<label for="contactNo" class="col-form-label">Contact-No:</label>
-									<input type="text" class="form-control" id="contactNo" name="contactNo" data-src="contactNo" >
-								</div>
-								<div class="form-group">
-									<label for="password" class="col-form-label">Password:</label>
-									<input type="text" class="form-control" id="password" name="password" data-src="password" >
-								</div>
-								<div class="form-group">
-									<label for="Permission" class="col-form-label">Permission:</label>
-									<select class="form-control" id="Permission" name="Permission" data-src="Permission" >
-										<option value="2">Employee</option>
-										<option value="3">HR</option>
-										<option value="1">Administrator</option>
-									</select>
-								</div>
-
-								<input type="hidden" name="actionType" value="adduser">
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-primary" id="submitUser">Accept</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<!-- Update and edit User Modal -->
 			<div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,14 +139,6 @@
 									<label for="contactNo" class="col-form-label">Contact-No:</label>
 									<input type="text" class="form-control" id="contactNo" name="contactNo" data-src="contactNo" >
 								</div>
-								<div class="form-group">
-									<label for="Permission" class="col-form-label">Permission:</label>
-									<select class="form-control" id="Permission" name="Permission" data-src="Permission" >
-										<option value="2">Employee</option>
-										<option value="3">HR</option>
-										<option value="1">Administrator</option>
-									</select>
-								</div>
 								<input type="hidden" name="actionType" value="updateUser">
 								<input type="hidden"  id="id" name="id">
 								<div class="modal-footer">
@@ -216,7 +166,7 @@
 				"lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
 				"order": [[ 1, "desc" ]],
 				"ajax": {
-					"url": 'functions/tables/users.php',
+					"url": 'functions/tables/employee-users.php',
 					"type": "POST",
 				},
 				"initComplete": function (settings, json) {
@@ -248,7 +198,6 @@
 
 			//move buttons to container
 			
-	
 			$('#users').on('click', '.triggerEdit', function() {
 				var id = $(this).data('rec');
 				var name = $(this).data('name');
@@ -267,40 +216,6 @@
 				$('#exampleModalEdit').modal('show');
 			});
 
-
-            // Delete User
-			$('#users').on('click', '.triggerActions', function() {
-				let id = $(this).data('rec');
-
-				$.confirm({
-					title: 'Confirm Deletion',
-					content: 'Are you sure you want to delete this user?',
-					buttons: {
-						confirm: function() {
-							// Delete operation
-							$.ajax({
-								url: 'functions/functions.php',
-								type: 'POST',
-								data: {
-									actionType: 'deleteUser',
-									id: id
-								},
-								success: function(response) {
-									location.reload()
-
-								},
-							});
-						},
-						cancel: function(){
-							location.reload()
-						}
-					}
-				});
-			});
-
-			$('#exampleModal').on('hidden.bs.modal', function () {
-				location.reload();
-			});
 			$('#exampleModalEdit').on('hidden.bs.modal', function () {
 				location.reload();
 			});

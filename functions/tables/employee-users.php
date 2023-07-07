@@ -29,10 +29,7 @@
         $users = array_values($filteredUsers);
     }
 
-    //sorting we have to change for actions as we cannot sort using actions it provide javascript error
-    if($columnName ='actions'){
-        $columnName = 'name';
-    }
+
 
     usort($users, function ($a, $b) use ($orderColumn, $orderDirection,$columnName) {
         $column = $orderColumn === 0 ? 'id' : $columnName;
@@ -56,16 +53,10 @@
         $data['data'][$r]['contactNo'] = $row['contactNo'];
         $data['data'][$r]['Permission_Name'] = $row['Permission_Name'];
         $data['data'][$r]['created'] = $row['created'];
-        $data['data'][$r]['actions'] = "<button class='btn btn-danger triggerActions' data-rec='$row[id]'>
-                                            <span class='glyphicon glyphicon-trash' id='delete' title='delete' data-toggle='tooltip'></span>
-                                        </button>
-                                            &nbsp;&nbsp;
-                                        <button class='btn btn-primary triggerEdit' data-rec='$row[id]' data-name='$row[name]'
+        $data['data'][$r]['actions'] = "<button class='btn btn-primary triggerEdit' data-rec='$row[id]' data-name='$row[name]'
                                             data-email='$row[email]' data-surname='$row[surname]' data-contactNo='$row[contactNo]'>
                                             <span class='glyphicon glyphicon-pencil' id='edit' title='edit' data-toggle='tooltip'></span>
-                                        </button>
-                                        ";
-						
+                                        </button>";
 
         ++$r;
     }

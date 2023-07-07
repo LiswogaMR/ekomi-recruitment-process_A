@@ -1,0 +1,43 @@
+[06-Jul-2023 13:23:00 Europe/Berlin] Hello, errors!
+[06-Jul-2023 13:23:00 Europe/Berlin] PHP Notice:  Undefined index: msg in C:\xampp\htdocs\appraisal\index.php on line 49
+[06-Jul-2023 13:30:34 Europe/Berlin] Hello, errors!
+[06-Jul-2023 13:30:34 Europe/Berlin] PHP Notice:  Undefined index: msg in C:\xampp\htdocs\appraisal\index.php on line 49
+[07-Jul-2023 10:47:22 Europe/Berlin] Hello, errors!
+[07-Jul-2023 10:47:22 Europe/Berlin] PHP Notice:  Undefined index: msg in C:\xampp\htdocs\appraisal\index.php on line 49
+[07-Jul-2023 10:48:16 Europe/Berlin] Hello, errors!
+[07-Jul-2023 10:48:34 Europe/Berlin] Hello, errors!
+[07-Jul-2023 10:49:42 Europe/Berlin] Hello, errors!
+[07-Jul-2023 10:50:21 Europe/Berlin] Hello, errors!
+[07-Jul-2023 10:54:18 Europe/Berlin] Hello, errors!
+[07-Jul-2023 11:42:56 Europe/Berlin] Hello, errors!
+[07-Jul-2023 11:42:56 Europe/Berlin] PHP Notice:  Undefined index: msg in C:\xampp\htdocs\appraisal\index.php on line 47
+[07-Jul-2023 11:43:20 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:04:26 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:04:39 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:04:42 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:05:02 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:05:11 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:05:31 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:05:50 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:06:44 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:06:45 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:06:47 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:08:33 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:08:40 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:12:43 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:12:51 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:13:36 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:13:48 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:15:58 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:17:22 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:19:32 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:22:50 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:36:09 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:55:17 Europe/Berlin] Hello, errors!
+[07-Jul-2023 12:59:08 Europe/Berlin] Hello, errors!
+[07-Jul-2023 13:01:47 Europe/Berlin] Hello, errors!
+[07-Jul-2023 13:01:53 Europe/Berlin] Hello, errors!
+[07-Jul-2023 15:14:48 Europe/Berlin] Hello, errors!
+[07-Jul-2023 20:52:16 Europe/Berlin] Hello, errors!
+[07-Jul-2023 20:52:25 Europe/Berlin] Hello, errors!
+[07-Jul-2023 20:58:15 Europe/Berlin] Hello, errors!

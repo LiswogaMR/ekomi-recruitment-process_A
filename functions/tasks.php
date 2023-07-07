@@ -1,6 +1,8 @@
 <?php
 
     include("connection.php");
+    session_start();
+
     class Task {
         private $conn;
 
@@ -9,7 +11,7 @@
         }
 
         //new task
-        public function createTask($title, $description, $status, $date_created ){
+        public function createTask($title, $description, $status, $date_created,$assigned_to ){
              //Check if the title already exists before adding a new one
              $taskQuery = "SELECT * FROM task WHERE title = :title";
              $taskQuery = $this->conn->prepare($taskQuery);
@@ -23,12 +25,17 @@
                  exit();
              }else{
 
-                $sql = "INSERT INTO task (title, description, status, date_created ) VALUES (:title, :description, :status, :date_created)";
+                $assigned_by = $_SESSION['user_id'];
+                
+                $sql = "INSERT INTO task (title, description, status, date_created, assigned_to, assigned_by ) 
+                VALUES (:title, :description, :status, :date_created, :assigned_to, :assigned_by)";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(':title', $title);
                 $stmt->bindParam(':description', $description);
                 $stmt->bindParam(':status', $status);
                 $stmt->bindParam(':date_created', $date_created);
+                $stmt->bindParam(':assigned_to', $assigned_to);
+                $stmt->bindParam(':assigned_by', $assigned_by);
                 $stmt->execute();
                  
                 header('Location: ' . $_SERVER['HTTP_REFERER'] . '?success=1');
@@ -39,9 +46,32 @@
 
         //Read all task
         public function getAllTask(){
-            $sql = "SELECT * FROM task";
-            $stmt = $this->conn->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $permission_group_id = $_SESSION['permission_group_id'];
+            $user_id = $_SESSION['user_id'];
+
+            if($permission_group_id == '2'){ 
+                $sql = "SELECT task.*, assigned_user.name AS assigned_to_name, assigned_user.surname AS assigned_to_surname, 
+                                assigned_by_user.name AS assigned_by_name, assigned_by_user.surname AS assigned_by_surname 
+                        FROM task 
+                        JOIN user AS assigned_user ON assigned_user.id = task.assigned_to
+                        JOIN user AS assigned_by_user ON assigned_by_user.id = task.assigned_by
+                        WHERE task.assigned_to = $user_id";
+                $stmt = $this->conn->query($sql);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            }else{
+
+                $sql = "SELECT task.*, assigned_user.name AS assigned_to_name, assigned_user.surname AS assigned_to_surname, 
+                                assigned_by_user.name AS assigned_by_name, assigned_by_user.surname AS assigned_by_surname 
+                        FROM task 
+                        JOIN user AS assigned_user ON assigned_user.id = task.assigned_to
+                        JOIN user AS assigned_by_user ON assigned_by_user.id = task.assigned_by";
+
+                $stmt = $this->conn->query($sql);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            }
+
         }
 
         //Update a task

@@ -1,6 +1,5 @@
 <?php
 	// session_start();
-	require_once 'functions/user.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +47,6 @@
 		<div id="content-wrap">
 			<div class="row">
 				<?php echo "<div id='toast_message'> ".$response." </div>"; ?>
-				<button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#exampleModal">Add Task</button>
 			</div>
 			<br/>
 			<div class="employee">
@@ -63,7 +61,6 @@
 									<th>Created</th>
 									<th>Date Updated</th>
 									<th>Assigned By</th>
-									<th>Assigned To</th>
 									<th>Status</th>
 									<th></th>
 								</tr>
@@ -76,7 +73,6 @@
 									<th>Created</th>
 									<th>Date Updated</th>
 									<th>Assigned By</th>
-									<th>Assigned To</th>
 									<th>Status</th>
 									<th></th>
 								</tr>
@@ -86,56 +82,6 @@
 				</div>
 			</div>
 
-			<!-- Modal To add new Task-->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">New Task</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form action="functions/functions.php" method="POST" id="formUser">
-								<div class="form-group">
-									<label for="title" class="col-form-label">Title:</label>
-									<input type="text" class="form-control" id="title" name="title" required>
-								</div>
-								<div class="form-group">
-									<label for="description" class="col-form-label">Description:</label>
-									<textarea class="form-control" id="description" name="description" data-src="description" required></textarea>
-								</div>
-								<?php 
-									$users = $userModel->getAllUsers();
-									$options = "";
-									foreach ($users as $users){
-										$options .= "<option value='".$users['id']."'>".$users['name']. ' ' .$users['surname']."</option>";
-									}
-
-								?>
-								<div class="form-group">
-									<label for="assigned_to" class="col-form-label">Assigne To:</label>
-									<select class="form-control" id="assigned_to" name="assigned_to" data-src="assigned_to" >
-										<?php echo $options; ?>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="status" class="col-form-label">Status:</label>
-									<input type="text" class="form-control" id="status" name="status" data-src="status" value="Active" readonly>
-								</div>
-								<input type="hidden" name="actionType" value="addtask">
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-primary" id="submitUser">Accept</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			
 			<!-- Update and complete a task Modal -->
 			<div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -161,6 +107,7 @@
 									<select class="form-control" id="status" name="status" data-src="status" >
 										<option value="Complete">Complete</option>
 										<option value="InProgress">In Progress</option>
+										<option value="OnHold">On Hold</option>
 										<option value="Active">Active</option>
 									</select>
 								</div>
@@ -177,7 +124,6 @@
 				</div>
 			</div>
 
-
 		</div>
 	</section>
 	<!-- footer starts here -->
@@ -193,7 +139,7 @@
 				"lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
 				"order": [[ 1, "desc" ]],
 				"ajax": {
-					"url": 'functions/tables/task.php',
+					"url": 'functions/tables/employee-task.php',
 					"type": "POST",
 				},
 				"initComplete": function (settings, json) {
@@ -210,7 +156,6 @@
 					{ "data": "date_created", "name": "date_created", "searchable": false},
 					{ "data": "date_updated", "name": "date_updated", "searchable": false},
 					{ "data": "assigned_by", "name": "assigned_by", "searchable": false},
-					{ "data": "assigned_to", "name": "assigned_to", "searchable": false},
 					{ "data": "status", "name": "status", "searchable": false},
 					{ "data": "actions", "name": "actions", "searchable": false},
 
