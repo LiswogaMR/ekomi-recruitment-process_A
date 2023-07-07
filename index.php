@@ -12,6 +12,10 @@
 			$response = "<span style='color: Red;'>Error. User does not exist</span>";
 		}
 	}
+
+	session_start();
+	// if(isset($_SESSION['id']))
+	// 	header("Location: employee.php");
 	
 ?>
 <!DOCTYPE html>

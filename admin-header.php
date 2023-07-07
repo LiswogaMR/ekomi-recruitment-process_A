@@ -1,36 +1,44 @@
 <?php
 
     include('functions/connection.php');
+    include('functions/session_data.php');
+
     $date = date('Y');
     $currentPage = basename($_SERVER['PHP_SELF']);
-    session_start();
 
     // Get user's IP address
     $userIP = $_SERVER['REMOTE_ADDR'];
 
-    // Send a request to the IP Geolocation API
-    $apiUrl = "https://ipgeolocationapi.com/api/{$userIP}";
-    $response = file_get_contents($apiUrl);
-    $data = json_decode($response, true);
+    $address = 'Cape town';
+    $apiKey = '2265b043141cf33671d01a1d6bb1e00a';  
 
-    // Extract the location data
-    $city = $data['geo']['city'];
-    $country = $data['geo']['country_name'];
+    // Construct the API URL
+    $url = "https://api.openweathermap.org/data/2.5/weather?address=$address&appid=$apiKey";
 
-    // Construct the weather API URL with the user's location
-    $apiUrl = "https://api.openweathermap.org/data/2.5/weather?q={$city},{$country}&APPID=2265b043141cf33671d01a1d6bb1e00a";
-    $response = file_get_contents($apiUrl);
-    $weatherData = json_decode($response, true);
+    // Make the API request
+    $response = file_get_contents($url);
 
-    // Access the weather information
-    $temperature = $weatherData['main']['temp'];
-    $description = $weatherData['weather'][0]['description'];
+    // Check if the request was successful
+    if ($response !== false) {
+        // Decode the JSON response
+        $data = json_decode($response, true);
 
-    // Print the weather information
-    // echo "Current Temperature: " . $temperature . "°C";
-    // echo "Weather Description: " . $description;
+        // Check if the data was decoded successfully
+        if ($data !== null && $data['cod'] === 200) {
+            // Extract the relevant weather information
+            $temperature = $data['main']['temp'];
+            $description = $data['weather'][0]['description'];
+
+            echo "Temperature: " . $temperature . "<br>";
+            echo "Description: " . $description . "<br>";
+        } else {
+            // echo "Unable to retrieve weather information.";
+        }
+    } else {
+        // echo "Unable to connect to the weather API.";
+    }
     
-    $permission_group_id = $_SESSION['permission_group_id'];
+    $permission_group_id = $_SESSION['user']['permission_group_id'];
    if($permission_group_id == '2' ){ ?>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -46,10 +54,10 @@
                     <ul class="dropdown-menu">
                         <li>
                             <div style="background-color:5CB85C; colour:#FFF; margin: 10px; text-align:center;">
-                                <?php echo $_SESSION['name'] . ' ' . $_SESSION['surname']; ?>
+                                <?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname']; ?>
                             </div>
                         </li>
-                        <li><a href="changePassword.php?email=<?php echo $_SESSION['email']; ?>"><span class="glyphicon glyphicon-edit"></span>&nbsp;Change password</a></li>
+                        <li><a href="changePassword.php?email=<?php echo $_SESSION['user']['email']; ?>"><span class="glyphicon glyphicon-edit"></span>&nbsp;Change password</a></li>
                         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                     </ul>
                 </li>
@@ -72,10 +80,10 @@
                     <ul class="dropdown-menu">
                         <li>
                             <div style="background-color:5CB85C; colour:#FFF; margin: 10px; text-align:center;">
-                                <?php echo $_SESSION['name'] . ' ' . $_SESSION['surname']; ?>
+                                <?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname']; ?>
                             </div>
                         </li>
-                        <li><a href="changePassword.php?email=<?php echo $_SESSION['email']; ?>"><span class="glyphicon glyphicon-edit"></span>&nbsp;Change password</a></li>
+                        <li><a href="changePassword.php?email=<?php echo $_SESSION['user']['email']; ?>"><span class="glyphicon glyphicon-edit"></span>&nbsp;Change password</a></li>
                         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                     </ul>
                 </li>

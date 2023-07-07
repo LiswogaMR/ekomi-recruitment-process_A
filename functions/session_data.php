@@ -1,6 +1,5 @@
 <?php
 
-    // Start the session
     if(!isset($_SESSION)){ 
         session_start();
 
@@ -22,7 +21,6 @@
             if($time_difference > $timeout_duration){
                 // Destroy the session
                 session_destroy();
-                // $_SESSION['msg'] = "Please Log in again. Session ended.";
                 header("Location: index.php");
             }
         }
@@ -32,8 +30,8 @@
         
     } 
 
-    if(!isset($_SESSION['user'])){
-        session_destroy();
+    if(!isset($_SESSION['user']['id'])){
+        // session_destroy();
         header("Location: index.php");
     }
 

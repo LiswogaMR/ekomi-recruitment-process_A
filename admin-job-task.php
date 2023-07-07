@@ -1,6 +1,6 @@
 <?php
 	// session_start();
-	require_once 'functions/user.php';
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,6 +107,9 @@
 									<textarea class="form-control" id="description" name="description" data-src="description" required></textarea>
 								</div>
 								<?php 
+									
+									require_once 'functions/user.php';
+									
 									$users = $userModel->getAllUsers();
 									$options = "";
 									foreach ($users as $users){

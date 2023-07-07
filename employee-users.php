@@ -1,6 +1,3 @@
-<?php
-	//session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +30,7 @@
 	<script type="text/javascript" src="vendor/js/buttons.print.min.js"></script>
 
 </head>
-<style>
-/* #toast_message {
-  background-color: transparent;
-} */
-</style>
+
 <body class="container">
 	<!-- header starts here -->
     <?php 
@@ -56,18 +49,6 @@
 			}
 		}
 
-		$apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=Pretoria,sa&APPID=2265b043141cf33671d01a1d6bb1e00a';
-		$response = file_get_contents($apiUrl);
-		$weatherData = json_decode($response, true);
-		
-		print_r($weatherData);
-		// Process and display the weather data
-		// $temperature = $weatherData['current']['temp'];
-		// $description = $weatherData['current']['weather'][0]['description'];
-
-		// echo "Current Temperature: $temperature &deg;C";
-		// echo "Weather Description: $description";
-		
 	?>
 	<!-- header ends here -->
 	<!-- page content starts here -->

@@ -1,7 +1,8 @@
 <?php
 
     include("connection.php");
-    session_start();
+    include('session_data.php');
+    // session_start();
 
     class Task {
         private $conn;
@@ -25,7 +26,7 @@
                  exit();
              }else{
 
-                $assigned_by = $_SESSION['user_id'];
+                $assigned_by = $_SESSION['user']['id'];
                 
                 $sql = "INSERT INTO task (title, description, status, date_created, assigned_to, assigned_by ) 
                 VALUES (:title, :description, :status, :date_created, :assigned_to, :assigned_by)";
@@ -46,8 +47,8 @@
 
         //Read all task
         public function getAllTask(){
-            $permission_group_id = $_SESSION['permission_group_id'];
-            $user_id = $_SESSION['user_id'];
+            $permission_group_id = $_SESSION['user']['permission_group_id'];
+            $user_id = $_SESSION['user']['id'];
 
             if($permission_group_id == '2'){ 
                 $sql = "SELECT task.*, assigned_user.name AS assigned_to_name, assigned_user.surname AS assigned_to_surname, 

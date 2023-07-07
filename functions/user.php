@@ -1,7 +1,7 @@
 <?php
 
     include("connection.php");
-    session_start();
+    include('session_data.php');
     
     class User {
         private $conn;
@@ -27,21 +27,17 @@
             }
             // Verify the hashed password
             if(password_verify($password, $user['password'])){
-                // Password is correct, create session
+             
                 session_start();
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['surname'] = $user['surname'];
-                $_SESSION['contactNo'] = $user['contactNo'];
-                $_SESSION['permission_group_id'] = $user['permission_group_id'];
-                
+                $_SESSION['user'] = $user;
+                unset($_SESSION['user']['password']);
+
                 // Login successful
-                $permission_group_id = $_SESSION['permission_group_id'];
+                $permission_group_id = $_SESSION['user']['permission_group_id'];
                 if($permission_group_id == '2' ){ 
-                    header("Location: ../employee-job-task.php");
+                    die(header("Location: ../employee-job-task.php"));
                 }else{
-                    header("Location: ../admin-job-task.php");
+                    die(header("Location: ../admin-job-task.php"));
                 }
                 
             }else{
@@ -71,7 +67,7 @@
 
             if($success && $stmt->rowCount() > 0) {
                 // Login successful
-                $permission_group_id = $_SESSION['permission_group_id'];
+                $permission_group_id = $_SESSION['user']['permission_group_id'];
                 if($permission_group_id == '2' ){ 
                     header("Location: ../employee-job-task.php");
                 }else{
@@ -152,8 +148,8 @@
         // Read all users
         public function getAllUsers(){
 
-            $permission_group_id = $_SESSION['permission_group_id'];
-            $user_id = $_SESSION['user_id'];
+            $permission_group_id = $_SESSION['user']['permission_group_id'];
+            $user_id = $_SESSION['user']['id'];
 
             if($permission_group_id == '2' ){ 
                 $sql = "SELECT user.*, permission_group.name AS 'Permission_Name'

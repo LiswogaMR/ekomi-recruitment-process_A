@@ -1,6 +1,3 @@
-<?php
-	//session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +30,6 @@
 	<script type="text/javascript" src="vendor/js/buttons.print.min.js"></script>
 
 </head>
-<style>
-/* #toast_message {
-  background-color: transparent;
-} */
-</style>
 <body class="container">
 	<!-- header starts here -->
     <?php 
