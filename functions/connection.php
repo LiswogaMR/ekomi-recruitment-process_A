@@ -3,7 +3,7 @@
     $host = 'localhost';
     $db = 'ekomi_recruitment';
     $username = 'root';
-    $password = 'virtual@PayDay5.2';
+    $password = '';
 
     //I used try to test if my connection was a success else I catch the error message that is for debbuging.
     try {

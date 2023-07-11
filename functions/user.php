@@ -13,7 +13,7 @@
         //user login
         public function loginUser($email, $password) {
             // Check if user exists based on email
-            $sql = "SELECT * FROM user WHERE email = :email";
+            $sql = "SELECT * FROM authentication WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':email', $email);
             $stmt->execute();

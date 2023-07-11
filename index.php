@@ -5,18 +5,14 @@
 	error_log( "Hello, errors!" );
 
 	$response = '';
-	if (isset($_GET['success'])) {
-		if($_GET['success'] == 1) {
+	if (isset($_GET['success'])){
+		if($_GET['success'] == 1){
 			$response = "<span style='color: red;'>Incorrect password!</span>";
-		}elseif ($_GET['success'] == 0) {
+		}elseif ($_GET['success'] == 0){
 			$response = "<span style='color: Red;'>Error. User does not exist</span>";
 		}
 	}
 
-	session_start();
-	// if(isset($_SESSION['id']))
-	// 	header("Location: employee.php");
-	
 ?>
 <!DOCTYPE html>
 <html>
